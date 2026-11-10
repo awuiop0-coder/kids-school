@@ -1,0 +1,171 @@
+/* ===== พื้นฐาน ===== */
+:root{
+  --ink:#4a2c7a; --pink:#ff8fb1; --yellow:#ffd84d; --green:#6fd66f; --blue:#5cc8ff;
+  --purple:#b79bff; --orange:#ffa94d; --white:#fff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%}
+body{
+  font-family:'Mali','Sarabun','Tahoma',sans-serif;color:var(--ink);
+  background:linear-gradient(#9fe0ff 0%,#d9f3ff 55%,#fff6d6 100%);
+  background-attachment:fixed;overflow-x:hidden;font-size:18px;line-height:1.5;
+}
+.hidden{display:none !important}
+button{font-family:inherit;cursor:pointer}
+main{position:relative;z-index:2;padding:76px 12px 160px}
+
+/* ===== ฉากหลัง ===== */
+.scene{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.sun{position:absolute;top:12px;right:18px;font-size:70px;animation:spin 30s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.cloud{position:absolute;background:#fff;border-radius:60px;width:120px;height:40px;opacity:.95;animation:drift linear infinite}
+.cloud::before,.cloud::after{content:"";position:absolute;background:#fff;border-radius:50%}
+.cloud::before{width:55px;height:55px;top:-26px;left:18px}
+.cloud::after{width:70px;height:70px;top:-36px;left:52px}
+.c1{top:70px;left:-150px;animation-duration:60s}
+.c2{top:150px;left:-150px;animation-duration:85s;animation-delay:-30s;transform:scale(.7)}
+.c3{top:30px;left:-150px;animation-duration:100s;animation-delay:-60s;transform:scale(.55)}
+@keyframes drift{to{left:110%}}
+.float{position:absolute;font-size:40px;animation:bob 4s ease-in-out infinite}
+.f1{top:36%;left:6%}.f2{top:28%;right:8%;animation-delay:-1s}.f3{top:18%;left:42%;font-size:54px;animation-delay:-2s}
+@keyframes bob{50%{transform:translateY(-14px)}}
+.hill{position:absolute;bottom:-60px;border-radius:50%}
+.h1{width:75%;height:230px;left:-10%;background:#8be28b}
+.h2{width:80%;height:200px;right:-15%;background:#6fd66f}
+.school{position:absolute;bottom:60px;left:6%;font-size:84px}
+.animal{position:absolute;bottom:20px;font-size:44px;animation:hop 2.2s ease-in-out infinite}
+.a1{left:30%}.a2{left:44%;animation-delay:-.4s}.a3{left:58%;animation-delay:-.8s}
+.a4{left:72%;animation-delay:-1.2s}.a5{left:86%;animation-delay:-1.6s}
+@keyframes hop{50%{transform:translateY(-16px)}}
+
+/* ===== แถบด้านบน ===== */
+.topbar{
+  position:fixed;top:0;left:0;right:0;z-index:5;display:flex;align-items:center;gap:8px;
+  padding:8px 12px;background:#fffbe8;border-bottom:4px solid var(--ink);flex-wrap:wrap;
+}
+.who{flex:1;font-weight:700;min-width:120px}
+.who small{font-weight:400;opacity:.8}
+.stars-total{font-weight:700;background:var(--yellow);border:3px solid var(--ink);border-radius:20px;padding:0 12px}
+.mini-btn{border:3px solid var(--ink);background:#fff;border-radius:16px;padding:4px 12px;color:var(--ink);font-weight:700}
+.mini-btn:hover{background:var(--yellow)}
+
+/* ===== หน้าจอ ===== */
+.screen{display:none}
+.screen.active{display:block;animation:pop .35s ease}
+@keyframes pop{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:none}}
+.wrap{max-width:900px;margin:0 auto}
+.center{text-align:center}
+
+/* ===== หน้าแรก ===== */
+.home{min-height:calc(100vh - 160px);}
+.screen.home.active{display:flex;align-items:center;justify-content:center}
+.home-inner{text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px}
+.logo-badge{font-size:84px;animation:bob 3s ease-in-out infinite}
+.home h1{font-size:clamp(34px,8vw,64px);color:#fff;-webkit-text-stroke:2px var(--ink);
+  text-shadow:0 5px 0 var(--ink);letter-spacing:1px;paint-order:stroke fill}
+.tagline{background:#fffbe8;border:3px solid var(--ink);border-radius:20px;padding:6px 18px;font-weight:600}
+.login-btn{
+  margin-top:10px;font-size:clamp(22px,5vw,34px);font-weight:700;color:#fff;
+  background:linear-gradient(#ff9ec0,#ff6f9f);border:5px solid var(--ink);border-radius:50px;
+  padding:18px 40px;box-shadow:0 8px 0 var(--ink);animation:pulse 1.6s ease-in-out infinite;
+}
+.login-btn:active{transform:translateY(6px);box-shadow:0 2px 0 var(--ink)}
+@keyframes pulse{50%{transform:scale(1.06)}}
+.home-animals{font-size:34px;letter-spacing:6px}
+
+/* ===== ส่วนประกอบทั่วไป ===== */
+.panel{background:#fffdf2;border:5px solid var(--ink);border-radius:28px;padding:20px;
+  box-shadow:0 8px 0 rgba(74,44,122,.35);margin-bottom:18px}
+.hello h2{font-size:26px}
+.section-title{margin:18px 6px 10px;font-size:24px;text-shadow:2px 2px 0 #fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
+.tile{
+  border:4px solid var(--ink);border-radius:24px;padding:16px 10px;text-align:center;color:var(--ink);
+  font-size:20px;font-weight:700;box-shadow:0 6px 0 var(--ink);transition:transform .12s;
+}
+.tile:hover{transform:translateY(-4px) rotate(-1deg)}
+.tile:active{transform:translateY(4px);box-shadow:0 2px 0 var(--ink)}
+.tile .em{display:block;font-size:50px}
+.tile small{display:block;font-weight:400;font-size:14px}
+.c-pink{background:var(--pink)}.c-yellow{background:var(--yellow)}.c-green{background:var(--green)}
+.c-blue{background:var(--blue)}.c-purple{background:var(--purple)}.c-orange{background:var(--orange)}
+.btn{
+  display:inline-block;margin:10px 6px 0 0;font-size:19px;font-weight:700;color:var(--ink);
+  border:4px solid var(--ink);border-radius:30px;padding:10px 22px;box-shadow:0 5px 0 var(--ink);
+}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 var(--ink)}
+.btn.ghost{background:#fff}
+.list{display:flex;flex-direction:column;gap:10px;margin:14px 0}
+.list .tile{display:flex;align-items:center;gap:12px;text-align:left;padding:12px 16px}
+.list .tile .em{font-size:36px}
+.list .tile .ok{margin-left:auto}
+
+/* ===== เนื้อหาบทเรียน ===== */
+.lesson-body{margin:14px 0;font-size:19px}
+.lesson-body h4{margin:12px 0 6px;font-size:21px}
+.lesson-body p{margin:6px 0}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0}
+.chip{background:#fff;border:3px solid var(--ink);border-radius:18px;padding:6px 12px;text-align:center;min-width:92px}
+.chip b{display:block;font-size:30px;color:#e0457b}
+.chip .e{font-size:30px;display:block}
+.eq{background:#fff3b0;border:3px dashed var(--ink);border-radius:16px;padding:8px 14px;margin:8px 0;font-size:22px;font-weight:700}
+.big-emoji{font-size:34px;letter-spacing:2px}
+
+/* ===== แบบทดสอบ ===== */
+.quiz-head{display:flex;justify-content:space-between;font-size:18px}
+.bar{height:16px;border:3px solid var(--ink);border-radius:12px;background:#fff;margin:8px 0 14px;overflow:hidden}
+.bar div{height:100%;width:0;background:var(--green);transition:width .3s}
+.quiz-emoji{text-align:center;font-size:54px;min-height:20px;word-break:break-all}
+.quiz-q{text-align:center;margin:8px 0 14px;font-size:24px}
+.choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.choice{
+  background:#fff;border:4px solid var(--ink);border-radius:22px;padding:14px;font-size:22px;font-weight:700;
+  color:var(--ink);box-shadow:0 5px 0 var(--ink);
+}
+.choice:hover{background:#fff3b0}
+.choice.right{background:var(--green);animation:pop .3s}
+.choice.wrong{background:#ff9a9a;animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.feedback{min-height:34px;text-align:center;font-size:22px;font-weight:700;margin-top:12px}
+
+/* ===== เกมจับคู่ ===== */
+.hint{text-align:center;margin:6px 0 12px}
+.match-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:560px;margin:0 auto 10px}
+.mcard{
+  aspect-ratio:1/1;border:4px solid var(--ink);border-radius:20px;background:var(--purple);
+  font-size:clamp(14px,3.4vw,22px);font-weight:700;color:var(--ink);box-shadow:0 5px 0 var(--ink);
+  display:flex;align-items:center;justify-content:center;padding:4px;line-height:1.2;
+}
+.mcard .back{display:none}
+.mcard.open,.mcard.done{background:#fff}
+.mcard.open .front,.mcard.done .front{display:none}
+.mcard.open .back,.mcard.done .back{display:block}
+.mcard.done{background:var(--green)}
+.mcard .back.emo{font-size:clamp(28px,7vw,46px)}
+
+/* ===== ผลคะแนน ===== */
+.res-stars{font-size:64px;margin:6px 0}
+.res-score{font-size:26px;font-weight:700}
+
+/* ===== ตารางคะแนน ===== */
+.select{font-family:inherit;font-size:18px;padding:8px 12px;border:4px solid var(--ink);border-radius:16px;margin:10px 0;background:#fff;color:var(--ink)}
+.board-body table{width:100%;border-collapse:collapse;margin:8px 0}
+.board-body th,.board-body td{border-bottom:2px dashed var(--ink);padding:6px;text-align:left}
+.board-body th{background:var(--yellow)}
+
+/* ===== หน้าต่างเข้าสู่ระบบ ===== */
+.modal{position:fixed;inset:0;z-index:10;background:rgba(74,44,122,.55);display:flex;align-items:center;justify-content:center;padding:14px;overflow:auto}
+.modal-box{background:#fffdf2;border:5px solid var(--ink);border-radius:28px;padding:22px;max-width:460px;width:100%;animation:pop .3s}
+.modal-box label{display:block;margin:12px 0 4px;font-weight:700}
+.modal-box input{width:100%;font-family:inherit;font-size:20px;padding:10px 14px;border:4px solid var(--ink);border-radius:18px}
+.pick{display:flex;gap:10px;flex-wrap:wrap}
+.pick button{flex:1;min-width:64px;font-size:22px;font-weight:700;padding:8px;border:4px solid var(--ink);border-radius:18px;background:#fff;color:var(--ink)}
+.pick button.sel{background:var(--yellow);transform:scale(1.06);box-shadow:0 4px 0 var(--ink)}
+.pick.avatars button{font-size:30px;flex:0 0 auto;min-width:56px}
+.err{color:#d6244b;font-weight:700;min-height:24px}
+
+@media (max-width:560px){
+  body{font-size:16px}
+  .school{font-size:60px}
+  .topbar{font-size:14px}
+}

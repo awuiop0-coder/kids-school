@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>โรงเรียนสัตว์น้อย | สื่อการสอนระดับประถมศึกษา</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ฉากหลังโลกการ์ตูนแฟนตาซี -->
+<div class="scene" aria-hidden="true">
+  <div class="sun">☀️</div>
+  <div class="cloud c1"></div>
+  <div class="cloud c2"></div>
+  <div class="cloud c3"></div>
+  <div class="float f1">🦄</div>
+  <div class="float f2">🦋</div>
+  <div class="float f3">🌈</div>
+  <div class="hill h1"></div>
+  <div class="hill h2"></div>
+  <div class="school">🏫</div>
+  <div class="animal a1">🐰</div>
+  <div class="animal a2">🐻</div>
+  <div class="animal a3">🐼</div>
+  <div class="animal a4">🦊</div>
+  <div class="animal a5">🐥</div>
+</div>
+
+<!-- แถบด้านบน -->
+<header id="topbar" class="topbar hidden">
+  <button class="mini-btn" data-act="menu">🏠 หน้าหลัก</button>
+  <div class="who"><span id="tbAvatar">🐰</span> <span id="tbName"></span> <small id="tbGrade"></small></div>
+  <div class="stars-total">⭐ <span id="tbStars">0</span></div>
+  <button class="mini-btn" data-act="logout">🚪 ออก</button>
+</header>
+
+<main>
+
+  <!-- ===== หน้าแรก ===== -->
+  <section id="home" class="screen active home">
+    <div class="home-inner">
+      <div class="logo-badge">🏫</div>
+      <h1>โรงเรียนสัตว์น้อย</h1>
+      <p class="tagline">โลกการเรียนรู้แสนสนุก สำหรับน้อง ๆ ชั้น ป.1 – ป.3</p>
+      <button class="login-btn" data-act="login-open">🎒 เข้าสู่ระบบการเรียน</button>
+      <div class="home-animals">🐰 🐻 🐼 🦊 🐥</div>
+    </div>
+  </section>
+
+  <!-- ===== เมนูหลัก (หน้าบทเรียน + เกม) ===== -->
+  <section id="menu" class="screen">
+    <div class="wrap">
+      <div class="panel hello">
+        <h2 id="menuHello"></h2>
+        <p id="menuSub"></p>
+      </div>
+
+      <h3 class="section-title">📖 บทเรียน</h3>
+      <div id="subjectGrid" class="grid"></div>
+
+      <h3 class="section-title">🎮 เกมการศึกษา</h3>
+      <div id="gameGrid" class="grid"></div>
+
+      <div class="center"><button class="btn c-purple" data-act="board">🏆 ตารางคะแนน</button></div>
+    </div>
+  </section>
+
+  <!-- ===== รายการบทเรียนของวิชา ===== -->
+  <section id="subject" class="screen">
+    <div class="wrap">
+      <div class="panel">
+        <h2 id="subjectTitle"></h2>
+        <div id="lessonList" class="list"></div>
+        <button id="subjectQuizBtn" class="btn c-orange" data-act="subject-quiz">📝 ทำแบบทดสอบ</button>
+        <button class="btn ghost" data-act="menu">⬅️ กลับ</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== เนื้อหาบทเรียน ===== -->
+  <section id="lesson" class="screen">
+    <div class="wrap">
+      <div class="panel">
+        <h2 id="lessonTitle"></h2>
+        <div id="lessonBody" class="lesson-body"></div>
+        <button id="lessonDone" class="btn c-green" data-act="lesson-done">✅ อ่านจบแล้ว</button>
+        <button class="btn ghost" data-act="lesson-back">⬅️ กลับไปรายการบทเรียน</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== แบบทดสอบ / เกมตอบคำถาม ===== -->
+  <section id="quiz" class="screen">
+    <div class="wrap">
+      <div class="panel">
+        <div class="quiz-head"><b id="quizTitle"></b><span id="quizProgress"></span></div>
+        <div class="bar"><div id="quizBar"></div></div>
+        <div id="quizEmoji" class="quiz-emoji"></div>
+        <h2 id="quizQ" class="quiz-q"></h2>
+        <div id="quizChoices" class="choices"></div>
+        <div id="quizFeedback" class="feedback"></div>
+        <button class="btn ghost" data-act="quiz-exit">⬅️ ออกจากเกม</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== เกมจับคู่ ===== -->
+  <section id="match" class="screen">
+    <div class="wrap">
+      <div class="panel">
+        <div class="quiz-head"><b>🧩 เกมจับคู่</b><span>เปิดไป <b id="matchMoves">0</b> ครั้ง</span></div>
+        <p id="matchHint" class="hint"></p>
+        <div id="matchGrid" class="match-grid"></div>
+        <button class="btn ghost" data-act="quiz-exit">⬅️ ออกจากเกม</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ผลคะแนน ===== -->
+  <section id="result" class="screen">
+    <div class="wrap">
+      <div class="panel center">
+        <h2 id="resTitle"></h2>
+        <div id="resStars" class="res-stars"></div>
+        <p id="resScore" class="res-score"></p>
+        <p id="resMsg"></p>
+        <button class="btn c-green" data-act="again">🔁 เล่นอีกครั้ง</button>
+        <button class="btn c-blue" data-act="menu">🏠 กลับหน้าหลัก</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ตารางคะแนน ===== -->
+  <section id="board" class="screen">
+    <div class="wrap">
+      <div class="panel">
+        <h2>🏆 ตารางคะแนน</h2>
+        <select id="boardGame" class="select"></select>
+        <div id="boardBody" class="board-body">กำลังโหลด...</div>
+        <button class="btn ghost" data-act="menu">⬅️ กลับ</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== หน้าต่างเข้าสู่ระบบ ===== -->
+<div id="modal" class="modal hidden">
+  <div class="modal-box">
+    <h2>👋 สวัสดีน้อง ๆ!</h2>
+    <label>ชื่อเล่นของหนู</label>
+    <input id="inName" type="text" maxlength="20" placeholder="พิมพ์ชื่อเล่นที่นี่" autocomplete="off">
+    <label>เรียนอยู่ชั้นไหน</label>
+    <div id="gradePick" class="pick">
+      <button data-grade="1">ป.1</button>
+      <button data-grade="2">ป.2</button>
+      <button data-grade="3">ป.3</button>
+    </div>
+    <label>เลือกเพื่อนสัตว์น้อย</label>
+    <div id="avatarPick" class="pick avatars"></div>
+    <p id="loginErr" class="err"></p>
+    <button class="btn c-green" data-act="login-go">🚀 เริ่มเรียนกันเลย!</button>
+    <button class="btn ghost" data-act="login-close">ยกเลิก</button>
+  </div>
+</div>
+
+<script src="config.js"></script>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
